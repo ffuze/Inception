@@ -23,6 +23,6 @@ COPY conf/www.conf /etc/php/8.2/fpm/pool.d/
 COPY tools/setup_wordpress.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup_wordpress.sh
 
-EXPOSE 5000
+EXPOSE 9000
 
 ENTRYPOINT ["/usr/local/bin/setup_wordpress.sh"]

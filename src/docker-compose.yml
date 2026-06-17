@@ -11,9 +11,6 @@ services:
       - mariadb_data:/var/lib/mysql
     env_file:
       - ./.env
-    secrets:
-      - db_password
-      - db_root_password
     restart: always
 # Wordpress
   wordpress:
@@ -29,14 +26,11 @@ services:
       - wordpress_data:/var/www/html
     env_file:
       - ./.env
-    secrets:
-      - db_password
     restart: always
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
       WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
       WORDPRESS_TABLE_PREFIX: wp_
 # Nginx
   nginx:
@@ -71,8 +65,3 @@ volumes:
       type: none
       o: bind
       device: /home/adegl-in/data/wordpress
-secrets:
-  db_root_password:
-    file: ./secrets/db_root_password.txt
-  db_password:
-    file: ./secrets/db_password.txt
